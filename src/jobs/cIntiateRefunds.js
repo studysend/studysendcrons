@@ -11,7 +11,7 @@ export async function processRefunds() {
     const refundQuery = dsql`
       SELECT id, amount, joinee, transaction_id, topic
       FROM bookings 
-      WHERE transaction_status = 'processRefund';
+      WHERE transaction_status = 'processRefund' and payment=true;
     `;
     const refunds = await db.execute(refundQuery);
 

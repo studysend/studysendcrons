@@ -7,10 +7,11 @@ export async function updateBookings() {
   try {
     logMessage(jobName, "Starting booking update process...");
 
+    // todo: only fetch the dates which are one day before do not process all the transactions
     const bookingsQuery = dsql`
       SELECT id, meeting_status, joined_by 
       FROM bookings 
-      WHERE transaction_status = 'unavailable';
+      WHERE transaction_status = 'unavailable' and payment=true;
     `;
 
     const bookings = await db.execute(bookingsQuery);
