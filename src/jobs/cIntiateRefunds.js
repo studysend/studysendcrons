@@ -39,6 +39,17 @@ export async function processRefunds() {
           WHERE email = ${joinee} AND currency = 'USD' LIMIT 1;
         `;
         const walletData = await trx.execute(walletQuery);
+        // fetch the profile id from the profile table where email is joinee
+        const profileQuery = dsql`
+          SELECT id 
+          FROM profile
+          WHERE email = ${joinee} LIMIT 1;
+        `;
+        const profileData = await trx.execute(profileQuery);
+        let profileId;
+        if (profileData.rows.length > 0) {
+          profileId = profileData.rows[0].id;
+        }
 
         let walletId, newBalance;
         if (walletData.rows.length > 0) {
@@ -79,6 +90,22 @@ export async function processRefunds() {
                  ${
                    "Refunded $" + amount + ` for booking cancellation: ${topic}`
                  }
+               )`
+        );
+
+        // insert the notification
+        await trx.execute(
+          dsql`INSERT INTO notifications (userid, generationid, url, message, type)
+               VALUES (
+           ${profileId}, 
+           'Study Send Inc', 
+           '/',
+           ${
+             "You have been refunded $" +
+             amount +
+             ` for booking cancellation: ${topic}`
+           }, 
+           'invite'
                )`
         );
 

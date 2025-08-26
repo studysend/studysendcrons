@@ -23,6 +23,7 @@ export async function processWalletWithdrawals() {
       }
 
       for (const wallet of walletRows.rows) {
+        console.log("processing for the wallet", wallet);
         const userEmail = wallet.email;
         const walletBalance = parseFloat(wallet.amount);
 

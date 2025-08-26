@@ -89,3 +89,6 @@ public
 
 # TernJS port file
 .tern-port
+
+# git ignore 
+.vscode/
