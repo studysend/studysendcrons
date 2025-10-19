@@ -4,6 +4,10 @@ import Stripe from "stripe";
 import { logMessage } from "../logger.js";
 
 export async function processWalletWithdrawals() {
+  console.log(
+    "Starting wallet withdrawal process...",
+    process.env.STRIPE_SECRET
+  );
   const stripe = new Stripe(process.env.STRIPE_SECRET);
 
   const jobName = "wallet-withdrawals";
@@ -14,7 +18,7 @@ export async function processWalletWithdrawals() {
     await db.transaction(async (trx) => {
       // Fetch all wallet rows with an amount > 10 and active status
       const walletRows = await trx.execute(
-        dsql`SELECT email, amount FROM wallet WHERE amount > 10 AND status = 'active'`
+        dsql`SELECT email, amount FROM wallet WHERE amount > 1 AND status = 'active'`
       );
 
       if (walletRows.rows.length === 0) {

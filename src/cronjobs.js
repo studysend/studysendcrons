@@ -4,12 +4,14 @@ import { processTransactions } from "./jobs/bProcessTransactions.js";
 import { processRefunds } from "./jobs/cIntiateRefunds.js";
 import { processWalletWithdrawals } from "./jobs/dProcessWalletWithdrawals.js";
 import { logMessage } from "./logger.js"; // Logger for tracking
+import dotenv from "dotenv";
+dotenv.config();
 
 // Define cron jobs with specific schedules
 const jobs = [
   {
     name: "update-bookings",
-    schedule: "0 1 * * *", // Every day at 1:00 AM
+    schedule: "*/1 * * * *", // Every minute
     task: updateBookings,
   },
   {

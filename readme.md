@@ -1,0 +1,1 @@
+pm2 start src/cronjobs.js --name cronjobs 
