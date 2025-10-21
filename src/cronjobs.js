@@ -11,7 +11,7 @@ dotenv.config();
 const jobs = [
   {
     name: "update-bookings",
-    schedule: "*/1 * * * *", // Every minute
+    schedule: "15 1 * * *", // Every day at 1:00 AM
     task: updateBookings,
   },
   {
