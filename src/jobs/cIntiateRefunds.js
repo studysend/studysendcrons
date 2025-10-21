@@ -105,7 +105,7 @@ export async function processRefunds() {
              amount +
              ` for booking cancellation: ${topic}`
            }, 
-           'invite'
+           'refund'
                )`
         );
 
