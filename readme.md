@@ -1,1 +1,1 @@
-pm2 start src/cronjobs.js --name cronjobs 
+pm2 start src/cronjobs.js --name studysendcrons 
