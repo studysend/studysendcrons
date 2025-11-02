@@ -44,7 +44,7 @@ export async function processTransactions() {
         if (walletData.rows.length > 0) {
           walletId = walletData.rows[0].id;
           newBalance =
-            parseFloat(walletData.rows[0].amount) + parseFloat(amount) * 0.85;
+            parseFloat(walletData.rows[0].amount) + parseFloat(amount);
         } else {
           newBalance = amount * 0.85; // If no wallet exists, create a new one
         }
