@@ -46,7 +46,7 @@ export async function processTransactions() {
           newBalance =
             parseFloat(walletData.rows[0].amount) + parseFloat(amount);
         } else {
-          newBalance = amount * 0.85; // If no wallet exists, create a new one
+          newBalance = amount; // If no wallet exists, create a new one
         }
 
         logMessage(jobName, `New Balance for Admin ${admin}: ${newBalance}`);
