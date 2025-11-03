@@ -12,7 +12,7 @@ export async function processWalletWithdrawals() {
 
     // Fetch all eligible wallets first (outside any transaction)
     const walletRows = await db.execute(
-      dsql`SELECT email, amount FROM wallet WHERE amount < 10 AND status = 'active'`
+      dsql`SELECT email, amount FROM wallet WHERE amount >= 10 AND status = 'active'`
     );
 
     if (walletRows.rows.length === 0) {
